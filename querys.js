@@ -70,7 +70,9 @@ Model.aggregate([
     if (err) {
         console.log(err);
     } else {
+        console.group('Access by URI');
         result.forEach((uri)=>{
+            console.log(uri._id,uri.count);
             Model.aggregate([
                 {
                     $match: {
@@ -90,7 +92,7 @@ Model.aggregate([
                 } else {
                     console.group('User access by URI');
                     result.forEach((user)=>{
-                        console.log(user._id,uri._id,uri.count);
+                        console.log(user._id,uri._id,user.count, ((user.count/uri.count) *100)+"%");
                     });
                     console.groupEnd();
                     mongoose.connection.close();
