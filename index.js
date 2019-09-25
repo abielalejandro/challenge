@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var client  = mqtt.connect('ws://localhost:61614');
+var client  = mqtt.connect(process.env.MQ_CONN_URL);
  
 client.on('connect', function (err) {
   client.subscribe('presence', function (err) {
